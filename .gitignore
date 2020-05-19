@@ -1,2 +1,5 @@
 settings.json
 cmInfo.json
+"Formatted Survey Data.xlsx"
+__pycache__/
+*.pyc

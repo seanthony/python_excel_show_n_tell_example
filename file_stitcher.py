@@ -68,7 +68,7 @@ def build_row(d, event_data, headers, size):
             row.append(event_d.get(key))
     else:
         while len(row) < size:
-            row.append("")
+            row.append("-")
     return row
 
 
