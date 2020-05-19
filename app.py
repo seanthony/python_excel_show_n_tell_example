@@ -82,10 +82,11 @@ def format_data(tabular_data):
     for i in range(1, 6):
         sheet[f'C{i}'].alignment = Alignment(horizontal='right')
 
-    thin_border = Border(left=Side(style='thin', color=BRAND.get("navy")),
-                         right=Side(style='thin', color=BRAND.get("navy")),
-                         top=Side(style='thin', color=BRAND.get("navy")),
-                         bottom=Side(style='thin', color=BRAND.get("navy")))
+    side = Side(style='thin', color=BRAND.get("navy"))
+    thin_border = Border(left=side,
+                         right=side,
+                         top=side,
+                         bottom=side)
 
     for row in sheet:
         for cell in row:
@@ -99,18 +100,32 @@ def format_data(tabular_data):
             if i > 3:
                 size = 8
             sheet[f'{r}{i}'].font = Font(
-                name="Calibri", size=8, color=BRAND.get("gray"))
+                name="Calibri", size=size, color=BRAND.get("gray"))
 
     data_range = 'A6:{}{}'.format(
         get_chr(len(tabular_data[0]) - 1), 6 + len(tabular_data))
     sheet.auto_filter.ref = data_range
 
-    fill = PatternFill(bgColor=BRAND.get('teal'), fill_type="solid")
-    font = Font(name="Calibri", bold="True", color=BRAND.get("white"))
+    font = Font(name="Calibri", color=BRAND.get("white"))
+    font_bold = Font(name="Calibri", bold="True", color=BRAND.get("white"))
+    side = Side(border_style=None)
+    no_border = Border(left=side, right=side, top=side, bottom=side)
     for i in range(len(tabular_data[0])):
-        cell = sheet[f'{get_chr(i)}6']
-        cell.fill = fill
-        cell.font = font
+        c = get_chr(i)
+        cell = sheet[f'{c}6']
+        cell.fill = PatternFill(fgColor=BRAND.get(
+            'navy'), fill_type="solid", patternType="solid")
+        cell.font = font_bold
+
+        if c in ranges:
+            continue
+
+        for j in range(1, 6):
+            cell = sheet[f'{c}{j}']
+            cell.fill = PatternFill(fgColor=BRAND.get(
+                'teal'), fill_type="solid", patternType="solid")
+            cell.border = no_border
+            cell.font = font
 
     return wb
 
