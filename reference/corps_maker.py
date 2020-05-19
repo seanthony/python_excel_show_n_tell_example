@@ -56,15 +56,16 @@ def make_cms():
     return cms
 
 
-def load_cms():
-    wb = load_workbook('./referemce/cms.xlsx')
-    cms = [[cell.value for cell in row] for row in wb['Corps Members']]
-
-
 def make_list_dict(cm_table):
     header, values = cm_table[0], cm_table[1:]
     cms = [{header[i]: row[i] for i in range(len(header))} for row in values]
     return cms
+
+
+def load_cms():
+    wb = load_workbook('./referemce/cms.xlsx')
+    cm_table = [[cell.value for cell in row] for row in wb['Corps Members']]
+    return make_list_dict(cm_table)
 
 
 def make_survey_data(cms):

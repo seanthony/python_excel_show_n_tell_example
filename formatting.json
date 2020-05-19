@@ -1,0 +1,17 @@
+{
+    "participant_info": [
+        "PID",
+        "First",
+        "Last",
+        "Year",
+        "Grade Level",
+        "Coach"
+    ],
+    "survey_headers": [
+        "I learned new skills or strategies today",
+        "I was able to connect with someone new today",
+        "Session Attended",
+        "This session met my needs as learner",
+        "I came away from this session with a useful resource"
+    ]
+}
