@@ -7,6 +7,15 @@ openpyxl
 ```
 documentation for the library can be found here: https://openpyxl.readthedocs.io/en/stable/
 
+# key points for show and tell
+* openpyxl can edit/manipulate/template existing excel files
+* openpyxl can also write completely new excel files
+* can declare formatting in alignment with brand standards
+* data is shared between the different python files via locally stored json files (arrays of objects)
+    * this uses an if...exists else...write to save on processing time
+* using json files for file settings
+* using github for version control (hiding sensitive info in the .gitignore)
+
 
 ## note
 all data used is fictional
