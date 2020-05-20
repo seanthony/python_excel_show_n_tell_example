@@ -1,6 +1,7 @@
 from file_stitcher import get_tabular_data
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, Border, Side, PatternFill
+from json import load
 
 BRAND = {
     "white": "ffffff",
@@ -130,10 +131,34 @@ def format_data(tabular_data):
     return wb
 
 
+def build_cohort_reports(tabular_data, folder, filename, cohort_indicies):
+    for index in cohort_indicies:
+        values = list(set(map(lambda r: r[index], tabular_data[1:])))
+        for value in values:
+            data_subset = [tabular_data[0]] + \
+                list(filter(lambda r: r[index] == value, tabular_data[1:]))
+            wb = format_data(data_subset)
+            new_filename = '_'.join(
+                f'{tabular_data[0][index]}_{value}_{filename}'.split())
+            for ch in "'\"-:":
+                new_filename = new_filename.replace(ch, '')
+
+            filepath = f'{folder}Cohorts/{new_filename}'
+            wb.save(filepath)
+
+
 def main():
-    tabular_data = get_tabular_data(overwrite=True)
+    with open('./settings.json') as file:
+        settings = load(file)
+
+    tabular_data = get_tabular_data(overwrite=False)
     wb = format_data(tabular_data)
-    wb.save("Formatted Survey Data.xlsx")
+    filename = "Formatted_Survey_Data.xlsx"
+    wb.save(filename)  # saves local version
+    wb.save(settings.get('destination folder') + "Formatted_Survey_Data.xlsx")
+
+    build_cohort_reports(tabular_data, settings.get(
+        'destination folder'), filename, [3, 4, 5, 8])
 
 
 if __name__ == "__main__":
