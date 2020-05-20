@@ -151,7 +151,10 @@ def main():
     with open('./settings.json') as file:
         settings = load(file)
 
-    tabular_data = get_tabular_data(overwrite=False)
+    decision = input(
+        'Overwrite existing file (Y for yes)?\n>>>').lower().strip() == 'y'
+
+    tabular_data = get_tabular_data(overwrite=decision)
     wb = format_data(tabular_data)
     filename = "Formatted_Survey_Data.xlsx"
     wb.save(filename)  # saves local version

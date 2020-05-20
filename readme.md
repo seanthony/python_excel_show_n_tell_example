@@ -39,4 +39,5 @@ configuring it to a box shared folder will allow collaboration over the reports 
 ### future ideas
 * potentially using xlsxwriter to manipulate the excel files
 * adding a text interface to make decisions
+* sharing process updates as program advances
 * open to ideas for more!!
