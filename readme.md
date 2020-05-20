@@ -15,6 +15,7 @@ documentation for the library can be found here: https://openpyxl.readthedocs.io
     * this uses an if...exists else...write to save on processing time
 * using json files for file settings
 * using github for version control (hiding sensitive info in the .gitignore)
+* easily creating replicas of the reports with filtered data sets
 
 
 ## note
